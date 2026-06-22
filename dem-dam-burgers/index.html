@@ -1,2 +1,444 @@
-powershell -Command "Get-Content 'C:\Users\table\Desktop\almerraweb-deploy\dem-dam-burgers\index.html' | Set││                                         │
-    -Clipboard"
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dem Dam Burgers — Biloxi, MS | Burgers, Seafood & Southern Plates</title>
+<meta name="description" content="Dem Dam Burgers — hand-crafted burgers, loaded seafood plates, pasta & signature baked potatoes in Biloxi, MS. 209 Main St. (228) 207-3366.">
+
+<meta property="og:title" content="Dem Dam Burgers — Biloxi, MS">
+<meta property="og:description" content="Burgers, seafood plates, crawfish pasta & loaded baked potatoes. Dine in, takeout, or drive-through in Biloxi.">
+<meta property="og:type" content="restaurant">
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org","@type":"Restaurant",
+  "name":"Dem Dam Burgers",
+  "address":{"@type":"PostalAddress","streetAddress":"209 Main St","addressLocality":"Biloxi","addressRegion":"MS","postalCode":"39530"},
+  "telephone":"+1-228-207-3366","servesCuisine":"Burgers, Seafood, Southern",
+  "openingHoursSpecification":[
+    {"@type":"OpeningHoursSpecification","dayOfWeek":["Tuesday","Wednesday","Thursday"],"opens":"11:00","closes":"19:00"},
+    {"@type":"OpeningHoursSpecification","dayOfWeek":["Friday"],"opens":"11:00","closes":"21:00"},
+    {"@type":"OpeningHoursSpecification","dayOfWeek":["Saturday"],"opens":"11:00","closes":"19:00"},
+    {"@type":"OpeningHoursSpecification","dayOfWeek":["Sunday"],"opens":"12:00","closes":"17:00"}
+  ]
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#1a1410; --bg-2:#1f1812; --surface:#2a2118;
+  --line:rgba(220,120,40,.14); --glass-brd:rgba(220,120,40,.18);
+  --text:#f5efe6; --text-dim:#c4b8aa; --muted:#8a7d6e;
+  --red:#c0392b; --red-bright:#e74c3c; --red-deep:#8b1a1a;
+  --gold:#f0a040; --gold-dim:#d4892a;
+  --smoke:rgba(220,120,40,.08);
+  --radius:16px; --radius-lg:24px;
+  --shadow:0 30px 60px -30px rgba(0,0,0,.7);
+  --shadow-soft:0 14px 40px -20px rgba(0,0,0,.55);
+  --maxw:1160px;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',system-ui,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+body::before{
+  content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;
+  background:
+    radial-gradient(600px 400px at 85% -5%,rgba(192,57,43,.10),transparent 60%),
+    radial-gradient(500px 400px at 10% 25%,rgba(240,160,64,.06),transparent 55%),
+    radial-gradient(500px 500px at 80% 90%,rgba(192,57,43,.07),transparent 60%);
+}
+
+h1,h2,h3,.disp{font-family:'Alfa Slab One',Georgia,serif;font-weight:400;line-height:1.08;letter-spacing:-.01em}
+h1 em,h2 em{color:var(--gold);font-style:normal}
+.eyebrow{font-weight:700;letter-spacing:.2em;text-transform:uppercase;font-size:.70rem;color:var(--gold-dim)}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 26px}
+.sec-pad{padding:100px 0}
+
+.btn{
+  display:inline-flex;align-items:center;gap:.55rem;
+  font-weight:700;font-size:.9rem;cursor:pointer;border:none;
+  padding:.9rem 1.7rem;border-radius:999px;
+  transition:transform .18s var(--ease),box-shadow .25s,background .25s;
+}
+.btn:active{transform:scale(.96)}
+.btn-red{
+  background:linear-gradient(135deg,var(--red-bright),var(--red-deep));
+  color:#fff;box-shadow:0 12px 34px -10px rgba(192,57,43,.5);
+}
+.btn-red:hover{box-shadow:0 18px 42px -8px rgba(192,57,43,.75);transform:translateY(-2px)}
+.btn-outline{
+  background:transparent;border:1.5px solid var(--glass-brd);
+  color:var(--text);
+}
+.btn-outline:hover{background:rgba(240,160,64,.06);border-color:var(--gold);transform:translateY(-2px)}
+
+header.nav{
+  position:fixed;top:0;width:100%;z-index:100;
+  transition:background .35s,backdrop-filter .35s,border-color .35s;
+  border-bottom:1px solid transparent;
+}
+header.nav.scrolled{
+  background:rgba(26,20,16,.90);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:70px}
+.logo{display:flex;align-items:center;gap:.5rem;font-weight:800;font-size:1.1rem;letter-spacing:-.01em;color:var(--gold)}
+.logo .mk{font-family:'Alfa Slab One';font-size:1.5rem;line-height:1}
+.nav-links{display:flex;list-style:none;gap:2rem}
+.nav-links a{font-size:.84rem;font-weight:600;color:var(--text-dim);transition:color .2s;position:relative}
+.nav-links a:hover,.nav-links a:focus-visible{color:var(--gold)}
+.nav-links a::after{
+  content:"";position:absolute;bottom:-4px;left:0;width:0;height:1.5px;
+  background:var(--gold);transition:width .3s var(--ease);
+}
+.nav-links a:hover::after{width:100%}
+.nav-right{display:flex;align-items:center;gap:1rem}
+.nav-phone{font-weight:700;font-size:.85rem;color:var(--gold-dim)}
+.burger{display:none;background:none;border:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.burger span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px}
+
+.hero{min-height:100vh;display:flex;align-items:center;padding-top:70px}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
+.hero h1{font-size:clamp(2.6rem,5vw,4rem);margin:.5rem 0 1.2rem;line-height:1.06}
+.hero h1 em{display:block;font-size:clamp(3rem,6vw,5rem);line-height:.9}
+.hero p.lead{font-size:1.1rem;color:var(--text-dim);max-width:28rem;margin-bottom:1.8rem}
+.hero-cta{display:flex;gap:.8rem;flex-wrap:wrap;margin-bottom:2.4rem}
+.hero-visual{
+  position:relative;aspect-ratio:1;
+  border-radius:var(--radius-lg);overflow:hidden;
+  border:1px solid var(--line);background:var(--surface);
+  display:flex;align-items:center;justify-content:center;
+  font-size:5rem;
+}
+.hero-visual img{width:100%;height:100%;object-fit:cover}
+.hero-visual .placeholder-text{position:absolute;color:var(--muted);font-size:.85rem;text-align:center;padding:1rem}
+.hero-stats{display:flex;gap:2.2rem}
+.hero-stats .num{font-family:'Alfa Slab One';font-size:1.8rem;line-height:1.1;color:var(--gold)}
+.hero-stats .lbl{font-size:.76rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-top:2px}
+
+#menu{background:var(--bg-2)}
+.sec-head{text-align:center;margin-bottom:56px}
+.sec-head h2{font-size:clamp(2rem,4vw,3.2rem);margin:.5rem 0 .8rem}
+.sec-head p{color:var(--text-dim);max-width:26rem;margin:0 auto}
+.menu-cat{margin-bottom:40px}
+.menu-cat h3{font-family:'Alfa Slab One';font-size:1.5rem;color:var(--gold);margin-bottom:1.2rem;padding-bottom:.5rem;border-bottom:2px solid var(--line)}
+.menu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.menu-item{
+  background:var(--surface);border:1px solid var(--line);
+  border-radius:var(--radius);padding:1.2rem;
+  box-shadow:var(--shadow-soft);transition:transform .25s var(--ease),border-color .25s;
+  display:flex;justify-content:space-between;align-items:flex-start;gap:.8rem;
+}
+.menu-item:hover{transform:translateY(-3px);border-color:var(--gold)}
+.menu-item .mi-info{flex:1}
+.menu-item h4{font-weight:700;font-size:.95rem;margin-bottom:.2rem}
+.menu-item .desc{font-size:.78rem;color:var(--text-dim);line-height:1.5}
+.menu-item .price{font-weight:800;font-size:.95rem;color:var(--gold);white-space:nowrap;flex:none}
+.badge-fav{display:inline-block;font-size:.64rem;font-weight:700;text-transform:uppercase;background:rgba(192,57,43,.2);color:var(--red-bright);padding:2px 8px;border-radius:5px;margin-top:.4rem;letter-spacing:.04em}
+.menu-featured{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-bottom:40px}
+.menu-featured .mf-card{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);
+  overflow:hidden;box-shadow:var(--shadow-soft);transition:transform .25s var(--ease),border-color .25s;
+}
+.menu-featured .mf-card:hover{transform:translateY(-4px);border-color:var(--gold)}
+.menu-featured .mf-img{aspect-ratio:16/10;overflow:hidden;background:var(--bg);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.8rem}
+.menu-featured .mf-body{padding:1.2rem}
+.menu-featured .mf-body h4{font-weight:700;font-size:1rem}
+.menu-featured .mf-body .desc{font-size:.78rem;color:var(--text-dim);margin:.3rem 0}
+.menu-featured .mf-body .price{font-weight:800;font-size:1.1rem;color:var(--gold)}
+
+#info{background:var(--bg)}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:start}
+.info-text h2{font-size:clamp(2rem,4vw,3rem);margin:.5rem 0 1rem}
+.info-text p{color:var(--text-dim);margin-bottom:.7rem}
+.hours-list{list-style:none;display:flex;flex-direction:column;gap:.4rem;margin-top:1.2rem}
+.hours-list li{display:flex;justify-content:space-between;font-size:.88rem;padding:.3rem 0;border-bottom:1px solid var(--line)}
+.hours-list .day{color:var(--text-dim)}
+.hours-list .time{font-weight:600;color:var(--gold-dim)}
+.hours-list .closed{color:var(--red-bright);font-weight:600}
+.info-card{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);
+  padding:1.8rem;box-shadow:var(--shadow-soft);
+}
+.info-card h3{font-family:'Alfa Slab One';font-size:1.3rem;margin-bottom:1.2rem}
+.info-row{display:flex;gap:.7rem;margin-bottom:.9rem;align-items:flex-start}
+.info-row .ic{width:40px;height:40px;border-radius:10px;background:rgba(240,160,64,.12);display:grid;place-items:center;flex:none;color:var(--gold);font-size:1rem}
+.info-row .tx{font-size:.86rem;color:var(--text-dim)}
+.info-row .tx strong{color:var(--text);display:block;margin-bottom:2px}
+.map-wrap{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);height:200px;margin-top:1rem}
+.map-wrap iframe{width:100%;height:100%;border:0}
+
+.review-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.review{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:1.6rem}
+.review .stars{color:var(--gold);font-size:.9rem;margin-bottom:.5rem;letter-spacing:.05em}
+.review p{font-size:.88rem;color:var(--text-dim);line-height:1.6}
+.review .who{margin-top:.7rem;font-size:.8rem;color:var(--muted);font-weight:600}
+
+.cta-section{text-align:center;background:var(--bg-2);border-top:1px solid var(--line)}
+.cta-section h2{font-size:clamp(2rem,4vw,3rem);margin-bottom:.8rem}
+.cta-section p{color:var(--text-dim);max-width:28rem;margin:0 auto 1.8rem}
+.cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+
+footer{border-top:1px solid var(--line);padding:56px 0 28px}
+.foot-grid{display:grid;grid-template-columns:1.8fr 1fr 1fr 1.4fr;gap:30px}
+.foot-grid h5{font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem;font-weight:700}
+.foot-grid p,.foot-grid a{color:var(--text-dim);font-size:.86rem;line-height:2;display:block}
+.foot-grid a:hover{color:var(--text)}
+.foot-logo{display:flex;align-items:center;gap:.5rem;font-weight:800;font-size:1.1rem;margin-bottom:.6rem;color:var(--gold)}
+.foot-bottom{margin-top:36px;padding-top:20px;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;color:var(--muted);font-size:.78rem}
+
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .75s var(--ease),transform .75s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+.reveal-d1{transition-delay:.1s}.reveal-d2{transition-delay:.2s}.reveal-d3{transition-delay:.3s}
+
+@media(max-width:900px){
+  .hero-grid,.info-grid{grid-template-columns:1fr}
+  .hero{min-height:auto;text-align:center;padding-top:120px}
+  .hero p.lead{margin:0 auto 1.8rem}
+  .hero-cta,.hero-stats{justify-content:center}
+  .hero-visual{min-height:280px}
+  .nav-links{display:none}.burger{display:block}
+  .foot-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:560px){
+  .hero h1{font-size:2rem}.hero h1 em{font-size:2.5rem}
+  .menu-grid{grid-template-columns:1fr}
+  .menu-featured{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header class="nav" id="navbar">
+  <div class="wrap nav-inner">
+    <a href="#" class="logo"><span class="mk">DDB</span> Dem Dam Burgers</a>
+    <ul class="nav-links">
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#info">Hours & Location</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="tel:+12282073366" class="nav-phone">(228) 207-3366</a>
+      <a href="#info" class="btn btn-red" style="padding:.55rem 1.1rem;font-size:.8rem">Order</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow reveal">Biloxi, Mississippi</span>
+      <h1 class="reveal"><em>Dem Dam</em> Burgers</h1>
+      <p class="lead reveal">Hand-crafted burgers, loaded seafood plates, signature pastas & famous baked potatoes. Black-owned, Biloxi-born, made with soul.</p>
+      <div class="hero-cta reveal">
+        <a href="#menu" class="btn btn-red">See the Menu</a>
+        <a href="#info" class="btn btn-outline">Hours & Location</a>
+      </div>
+      <div class="hero-stats reveal">
+        <div><div class="num">4.1</div><div class="lbl">Rating</div></div>
+        <div><div class="num">214+</div><div class="lbl">Reviews</div></div>
+        <div><div class="num">40K</div><div class="lbl">Follows</div></div>
+      </div>
+    </div>
+    <div class="hero-visual reveal">
+      <span class="placeholder-text">🍔<br>Photo: Dem Dam Burgers</span>
+    </div>
+  </div>
+</section>
+
+<section class="sec-pad" id="menu">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Our Menu</span>
+      <h2>Made with <em>Soul</em></h2>
+      <p>Hand-crafted burgers, signature seafood plates, loaded potatoes & more.</p>
+    </div>
+
+    <div class="menu-cat reveal">
+      <h3>🍔 Burgers</h3>
+      <div class="menu-grid">
+        <div class="menu-item"><div class="mi-info"><h4>Single Cheeseburger</h4><p class="desc">Hand-crafted seasoned patty with cheese</p></div><span class="price">$5</span></div>
+        <div class="menu-item"><div class="mi-info"><h4>Double Cheeseburger</h4><p class="desc">Two patties, double the flavor</p><span class="badge-fav">Favorite</span></div><span class="price">$7</span></div>
+        <div class="menu-item"><div class="mi-info"><h4>Triple Cheeseburger</h4><p class="desc">Three seasoned patties stacked high</p></div><span class="price">$9</span></div>
+        <div class="menu-item"><div class="mi-info"><h4>Surf N Turf Burger</h4><p class="desc">Steak & shrimp on a burger</p></div><span class="price">$9</span></div>
+        <div class="menu-item"><div class="mi-info"><h4>Double Surf N Turf</h4><p class="desc">Double the surf, double the turf</p></div><span class="price">$12</span></div>
+        <div class="menu-item"><div class="mi-info"><h4>BBQ Bacon Single</h4><p class="desc">Smoky BBQ with crispy bacon</p></div><span class="price">$7</span></div>
+        <div class="menu-item"><div class="mi-info"><h4>BBQ Bacon Double</h4><p class="desc">Double patty with BBQ & bacon</p></div><span class="price">$10</span></div>
+        <div class="menu-item"><div class="mi-info"><h4>Bacon Cheeseburger</h4><p class="desc">Classic with crispy bacon</p></div><span class="price">$6</span></div>
+        <div class="menu-item"><div class="mi-info"><h4>Double Bacon Cheeseburger</h4><p class="desc">Double patty bacon beast</p></div><span class="price">$8</span></div>
+        <div class="menu-item"><div class="mi-info"><h4>Texas Cheese Steak</h4><p class="desc">Chopped ribeye with melted cheese</p></div><span class="price">$6</span></div>
+        <div class="menu-item"><div class="mi-info"><h4>Double Texas Cheese Steak</h4><p class="desc">Double the ribeye</p></div><span class="price">$9</span></div>
+        <div class="menu-item"><div class="mi-info"><h4>Patty Melt</h4><p class="desc">Grilled onions & melted cheese</p></div><span class="price">$6</span></div>
+        <div class="menu-item"><div class="mi-info"><h4>Double Patty Melt</h4><p class="desc">Twice the melt</p></div><span class="price">$8</span></div>
+      </div>
+    </div>
+
+    <div class="menu-cat reveal">
+      <h3>🔥 Signature Plates <span style="font-size:.75rem;font-weight:500;color:var(--text-dim)">Full / Half</span></h3>
+      <div class="menu-grid">
+        <div class="menu-item"><div class="mi-info"><h4>Fajita Plate</h4><p class="desc">Steak, chicken or shrimp with peppers & onions</p></div><span class="price">$15 / $8</span></div>
+        <div class="menu-item"><div class="mi-info"><h4>Seafood Plate</h4><p class="desc">4 blackened shrimp, broccoli & cheese sauce</p><span class="badge-fav">Popular</span></div><span class="price">$15 / $8</span></div>
+        <div class="menu-item"><div class="mi-info"><h4>Surf + Turf Fries</h4><p class="desc">Steak, shrimp & signature sauce on fries</p></div><span class="price">$15 / $8</span></div>
+        <div class="menu-item"><div class="mi-info"><h4>Steak Plate</h4><p class="desc">Chopped ribeye with yellow rice</p></div><span class="price">$12 / $7</span></div>
+        <div class="menu-item"><div class="mi-info"><h4>Chicken Plate</h4><p class="desc">Grilled chicken with yellow rice</p></div><span class="price">$12 / $7</span></div>
+        <div class="menu-item"><div class="mi-info"><h4>Steak & Shrimp</h4><p class="desc">Chopped ribeye with BBQ glaze & 3 jumbo shrimp</p></div><span class="price">$18</span></div>
+        <div class="menu-item"><div class="mi-info"><h4>Exclusive Sampler</h4><p class="desc">Ribeye, shrimp & crawfish pasta, broccoli, baked potato</p><span class="badge-fav">Signature</span></div><span class="price">$25</span></div>
+        <div class="menu-item"><div class="mi-info"><h4>The Lobster Plate</h4><p class="desc">Lobster tail, ribeye, mac & cheese, shrimp, broccoli, potato</p></div><span class="price">$35</span></div>
+      </div>
+    </div>
+
+    <div class="menu-cat reveal">
+      <h3>🥔 Loaded Baked Potatoes</h3>
+      <div class="menu-grid">
+        <div class="menu-item"><div class="mi-info"><h4>Plain</h4><p class="desc">Classic baked potato with butter</p></div><span class="price">$5</span></div>
+        <div class="menu-item"><div class="mi-info"><h4>Bacon & Cheese</h4><p class="desc">Loaded with bacon & shredded cheese</p></div><span class="price">$7</span></div>
+        <div class="menu-item"><div class="mi-info"><h4>Broccoli & Cheese</h4><p class="desc">Seasoned broccoli with cheese sauce</p></div><span class="price">$8</span></div>
+        <div class="menu-item"><div class="mi-info"><h4>Crawfish Cream</h4><p class="desc">Signature cream sauce, crawfish tails & cheese</p><span class="badge-fav">Must Try</span></div><span class="price">$8 / $15</span></div>
+        <div class="menu-item"><div class="mi-info"><h4>Surf + Turf</h4><p class="desc">Grilled steak, shrimp, broccoli & cheese sauce</p></div><span class="price">$15</span></div>
+      </div>
+    </div>
+
+    <div class="menu-cat reveal">
+      <h3>🍝 Pasta</h3>
+      <div class="menu-featured">
+        <div class="mf-card"><div class="mf-img">🍝 Cajun Chicken Pasta</div><div class="mf-body"><h4>Cajun Chicken</h4><p class="desc">Angel hair pasta in exclusive cream sauce, garnished with asparagus</p><span class="price">$15</span></div></div>
+        <div class="mf-card"><div class="mf-img">🦐 Shrimp & Crawfish</div><div class="mf-body"><h4>Shrimp & Crawfish</h4><p class="desc">Gulf shrimp & crawfish in rich cream sauce over angel hair</p><span class="price">$17</span></div></div>
+        <div class="mf-card"><div class="mf-img">🦞 Lobster & Shrimp</div><div class="mf-body"><h4>Lobster & Shrimp</h4><p class="desc">Premium lobster tail & jumbo shrimp in signature cream sauce</p><span class="price">$22</span></div></div>
+      </div>
+    </div>
+
+    <div class="menu-cat reveal">
+      <h3>🍟 Loaded Fries & Nachos <span style="font-size:.75rem;font-weight:500;color:var(--text-dim)">Full / Half</span></h3>
+      <div class="menu-grid">
+        <div class="menu-item"><div class="mi-info"><h4>Cheese Fries</h4><p class="desc">Ranch, cheese sauce & shredded cheese</p></div><span class="price">$4</span></div>
+        <div class="menu-item"><div class="mi-info"><h4>Steak Fries</h4><p class="desc">Chopped ribeye on loaded fries</p></div><span class="price">$9 / $6</span></div>
+        <div class="menu-item"><div class="mi-info"><h4>Chicken Fries</h4><p class="desc">Grilled chicken on loaded fries</p></div><span class="price">$9 / $6</span></div>
+        <div class="menu-item"><div class="mi-info"><h4>Seafood Fries</h4><p class="desc">Shrimp & crawfish loaded</p></div><span class="price">$11 / $6</span></div>
+        <div class="menu-item"><div class="mi-info"><h4>Fajita Fries</h4><p class="desc">Steak/chicken/shrimp fajita style</p></div><span class="price">$11 / $6</span></div>
+        <div class="menu-item"><div class="mi-info"><h4>Steak Nachos</h4><p class="desc">Full loaded nachos with ribeye</p></div><span class="price">$9 / $6</span></div>
+        <div class="menu-item"><div class="mi-info"><h4>Chicken Nachos</h4><p class="desc">Loaded nachos with chicken</p></div><span class="price">$9 / $6</span></div>
+        <div class="menu-item"><div class="mi-info"><h4>Surf N Turf Nachos</h4><p class="desc">Steak & shrimp on loaded nachos</p><span class="badge-fav">Hit</span></div><span class="price">$11 / $6</span></div>
+      </div>
+    </div>
+
+    <div class="menu-cat reveal">
+      <h3>🍗 Wings & Sides</h3>
+      <div class="menu-grid">
+        <div class="menu-item"><div class="mi-info"><h4>Wings (6 pc)</h4><p class="desc">Plain, BBQ, Garlic Parm, Buffalo, Lemon Pepper, 5 Alarm</p></div><span class="price">$10</span></div>
+        <div class="menu-item"><div class="mi-info"><h4>Wings (12 pc)</h4><p class="desc">Choose your sauce</p></div><span class="price">$18</span></div>
+        <div class="menu-item"><div class="mi-info"><h4>Hush Puppies</h4><p class="desc">Golden fried Southern classic</p></div><span class="price">$2</span></div>
+        <div class="menu-item"><div class="mi-info"><h4>Mac N Cheese</h4><p class="desc">Creamy baked mac & cheese</p></div><span class="price">$3</span></div>
+        <div class="menu-item"><div class="mi-info"><h4>Seasoned Broccoli</h4><p class="desc">Fresh steamed broccoli</p></div><span class="price">$3</span></div>
+        <div class="menu-item"><div class="mi-info"><h4>Yellow Rice</h4><p class="desc">Seasoned Southern yellow rice</p></div><span class="price">$3</span></div>
+      </div>
+    </div>
+
+    <div class="menu-cat reveal">
+      <h3>🍰 Desserts & Drinks</h3>
+      <div class="menu-grid">
+        <div class="menu-item"><div class="mi-info"><h4>Fried Cheesecake</h4><p class="desc">Crispy fried New York cheesecake</p><span class="badge-fav">Must Try</span></div><span class="price">$6</span></div>
+        <div class="menu-item"><div class="mi-info"><h4>Bread Pudding</h4><p class="desc">Warm Southern bread pudding</p></div><span class="price">$5</span></div>
+        <div class="menu-item"><div class="mi-info"><h4>Cupcake</h4><p class="desc">Freshly baked daily</p></div><span class="price">$4</span></div>
+        <div class="menu-item"><div class="mi-info"><h4>Fruit Punch / Lemonade</h4><p class="desc">Reg / Large</p></div><span class="price">$3 / $5</span></div>
+        <div class="menu-item"><div class="mi-info"><h4>Cup of Ice</h4><p class="desc">Crushed ice</p></div><span class="price">$2</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec-pad" id="info">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Visit Us</span>
+      <h2>Hours & <em>Location</em></h2>
+    </div>
+    <div class="info-grid">
+      <div class="info-text reveal">
+        <p>Come through to our spot on <strong>Main Street in Biloxi</strong>. Dine in, grab takeout, or hit the drive-through. Outdoor patio seating, free Wi-Fi — dogs welcome outside.</p>
+        <ul class="hours-list">
+          <li><span class="day">Monday</span><span class="time closed">Closed</span></li>
+          <li><span class="day">Tuesday</span><span class="time">11:00 AM – 7:00 PM</span></li>
+          <li><span class="day">Wednesday</span><span class="time">11:00 AM – 7:00 PM</span></li>
+          <li><span class="day">Thursday</span><span class="time">11:00 AM – 7:00 PM</span></li>
+          <li><span class="day">Friday</span><span class="time">11:00 AM – 9:00 PM</span></li>
+          <li><span class="day">Saturday</span><span class="time">11:00 AM – 7:00 PM</span></li>
+          <li><span class="day">Sunday</span><span class="time">12:00 PM – 5:00 PM</span></li>
+        </ul>
+      </div>
+      <div class="info-card reveal reveal-d1">
+        <h3>📍 Find Us</h3>
+        <div class="info-row"><div class="ic">📍</div><div class="tx"><strong>Address</strong>209 Main St, Biloxi, MS 39530</div></div>
+        <div class="info-row"><div class="ic">📞</div><div class="tx"><strong>Phone</strong><a href="tel:+12282073366">(228) 207-3366</a></div></div>
+        <div class="info-row"><div class="ic">🛵</div><div class="tx"><strong>Order</strong>Call ahead for pickup or drive-through</div></div>
+        <div class="info-row"><div class="ic">🌿</div><div class="tx"><strong>Vibe</strong>Outdoor seating · Dogs welcome · Free Wi-Fi · Drive-through</div></div>
+        <div class="map-wrap">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3443.197645397164!2d-88.8860184!3d30.3995088!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x889c0f3381afb9d7%3A0x13d174ad85a3da67!2s209%20Main%20St%2C%20Biloxi%2C%20MS%2039530!5e0!3m2!1sen!2sus!4v1624300000000!5m2!1sen!2sus" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Dem Dam Burgers location"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec-pad" id="reviews" style="padding-top:20px">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Reviews</span>
+      <h2>What <em>Customers</em> Say</h2>
+    </div>
+    <div class="review-grid">
+      <div class="review reveal"><div class="stars">★★★★★</div><p>"The Biloxi bomb is a must-try. Surf & Turf Fries with crawfish — best thing I've eaten on the Coast. Dem Dam good!"</p><div class="who">— Marcus T.</div></div>
+      <div class="review reveal reveal-d1"><div class="stars">★★★★★</div><p>"I'm from Louisiana and that was one of the best, juiciest burgers ever. Highly recommend — six thumbs up!"</p><div class="who">— Eric F.</div></div>
+      <div class="review reveal reveal-d2"><div class="stars">★★★★★</div><p>"The Surf & Turf Nachos are incredible! The staff is amazing. Our new weekly date spot."</p><div class="who">— Idalynn J.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec-pad cta-section" id="cta">
+  <div class="wrap">
+    <span class="eyebrow reveal">Hungry?</span>
+    <h2 class="reveal">Come Get You Some</h2>
+    <p class="reveal">Dine in, takeout, or drive-through. We're on Main Street in Biloxi.</p>
+    <div class="cta-btns reveal">
+      <a href="tel:+12282073366" class="btn btn-red">📞 Call to Order</a>
+      <a href="https://www.google.com/maps/dir/?api=1&destination=209+Main+St,+Biloxi,+MS+39530" class="btn btn-outline" target="_blank" rel="noopener">Get Directions</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div><div class="foot-logo">DDB Dem Dam Burgers</div><p>Hand-crafted burgers & Southern plates made with soul in Biloxi, Mississippi. Black-owned.</p></div>
+      <div><h5>Menu</h5><a href="#menu">Burgers</a><a href="#menu">Signature Plates</a><a href="#menu">Baked Potatoes</a><a href="#menu">Pasta</a></div>
+      <div><h5>Info</h5><a href="#info">Hours</a><a href="#info">Location</a><a href="#reviews">Reviews</a><a href="#cta">Contact</a></div>
+      <div><h5>Find Us</h5><p>209 Main St<br>Biloxi, MS 39530</p><a href="tel:+12282073366">(228) 207-3366</a></div>
+    </div>
+    <div class="foot-bottom"><span>&copy; 2026 Dem Dam Burgers · Biloxi, MS</span><span>Black-Owned · Southern Soul</span></div>
+  </div>
+</footer>
+
+<script>
+const io=new IntersectionObserver(es=>{es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});},{threshold:.14,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+const nav=document.getElementById('navbar');
+addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>60),{passive:true});
+
+document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();const t=document.querySelector(a.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth'});});});
+</script>
+</body>
+</html>
